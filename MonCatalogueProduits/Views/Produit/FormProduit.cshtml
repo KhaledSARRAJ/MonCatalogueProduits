@@ -1,0 +1,53 @@
+﻿ 
+@model MonCatalogueProduit.Service.Demande
+
+@{ 
+    //titre de la page
+    ViewData["titre"] = "Saisie d'une Demande";
+}
+ <p></p>
+ <div class="container col-md-8 col-md-offset-2">
+     <div class="panel panel-primary">
+         <!--les class viennent de bootstrap-->
+         <div class="panel-heading">Saisie d'une Demande</div>
+         <div class="panel-body">
+             <!--enregistrement-->
+             <form method="post" asp-action="SaveProduit">
+                 <div class="form-group">
+                     <label class="control-label">Désignation</label>
+                     <!--Dans mon modéle j'ai stocké un produit c'est pour cela value = model.designation-->
+                     <input type="text" name="Designation" value="@Model.Designation" class="form-control" />
+                     @Html.ValidationMessageFor(p => p.Designation, "", new { @class = "text-danger" })
+                 </div>
+
+                 <div class="form-group">
+                     <label class="control-label">Lieu</label>
+                     <input type="text" name="Lieu" value="@Model.Lieu" class="form-control" />
+                     @Html.ValidationMessageFor(p => p.Lieu, "", new { @class = "text-danger" })
+                 </div>
+
+                 <div class="form-group">
+                     <label class="control-label">Description</label>
+                     <input type="text" name="Description" value="@Model.Description" class="form-control" />
+                     @Html.ValidationMessageFor(p => p.Description, "", new { @class = "text-danger" })
+                 </div>
+
+                 <div class="form-group">
+                     <label class="control-label">Categorie</label>
+                     <select name="CategorieID">
+                         @{
+                             foreach (var c in ViewBag.categories)
+                             {
+                                 <option value="@c.CategorieID">@c.NomCategorie</option>
+                             }
+                         }
+                     </select>
+                 </div>
+
+                 <div>
+                     <button type="submit" class="btn btn-primary">Save</button>
+                 </div>
+             </form>
+         </div>
+     </div>
+ </div>
