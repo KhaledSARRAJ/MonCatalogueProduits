@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MonCatalogueProduit.Service;
-
+/*
 
 namespace MonCatalogueProduit.Controllers
 {
@@ -31,11 +31,11 @@ namespace MonCatalogueProduit.Controllers
             int position = page * size;
             //pour recuperer tout les produits
             IEnumerable<Demande> produits = 
-          dbContext.Produits.Where(p=>p.Designation.Contains(motCle)).Skip(position).Take(size).Include(p=>p.Categorie).ToList();//c'est  la methode syntax link (on peut utiliser le query syntax): select form where
+          dbContext.Demandes.Where(p=>p.Description.Contains(motCle)).Skip(position).Take(size).Include(p=>p.domainesactiviterDemande).ToList();//c'est  la methode syntax link (on peut utiliser le query syntax): select form where
             //stocker dans le controleur la page courrante
             ViewBag.currentPage = page;
             int totalPages;
-            int nbreProduit = dbContext.Produits.Where(p => p.Designation.Contains(motCle)).ToList().Count;
+            int nbreProduit = dbContext.Demandes.Where(p => p.Description.Contains(motCle)).ToList().Count;
             if(nbreProduit % size ==0 ) { 
                  totalPages = nbreProduit/size;
             }else{
@@ -43,14 +43,14 @@ namespace MonCatalogueProduit.Controllers
             }
             ViewBag.totalPages = totalPages;
             ViewBag.motCle = motCle;
-            return View("Produits",produits);//afficher tout les produits
+            return View("Demandes",produits);//afficher tout les produits
         }
 
         public IActionResult FormProduit()
         {
             Demande p = new Demande();
             //liste de categorie = IEnumerable 
-            IEnumerable<Categorie> cats = dbContext.Categories.ToList();
+            IEnumerable<DomaineActivite> cats = dbContext.ListeDomaineActiviter.ToList();
            //stocker dans le viewbag la liste de categorie
             ViewBag.categories = cats;
             return View("FormProduit",p);
@@ -59,12 +59,12 @@ namespace MonCatalogueProduit.Controllers
         [HttpPost]
         public IActionResult SaveProduit(Demande p)
         {
-            IEnumerable<Categorie> cats = dbContext.Categories.ToList();
+            IEnumerable<DomaineActivite> cats = dbContext.ListeDomaineActiviter.ToList();
             ViewBag.categories = cats;
 
             if (ModelState.IsValid)
             {
-                dbContext.Produits.Add(p);
+                dbContext.Demandes.Add(p);
                 dbContext.SaveChanges();
                 return RedirectToAction("Index");  
             }
@@ -76,3 +76,4 @@ namespace MonCatalogueProduit.Controllers
 
     }
 }
+*/
